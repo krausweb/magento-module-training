@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+
+    <menu>
+        <aks_training module="aks_training" translate="title">
+            <title>AKS Training</title>
+            <sort_order>40</sort_order>
+            <action>aks_training/adminhtml_training</action>
+        </aks_training>
+    </menu>
+
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <aks_training translate="title" module="aks_training">
+                                <title>AKS Training</title>
+                                <sort_order>11</sort_order>
+                            </aks_training>
+                        </children>
+                    </system>
+
+                    <aks_training translate="title" module="aks_training">
+                        <title>AKS Training</title>
+                        <sort_order>40</sort_order>
+                    </aks_training>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

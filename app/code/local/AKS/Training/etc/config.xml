@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <AKS_Training>
+            <version>1.0.6</version>
+        </AKS_Training>
+    </modules>
+
+    <global>
+
+        <blocks>
+            <aks_training>
+                <class>AKS_Training_Block</class>
+            </aks_training>
+        </blocks>
+
+        <helpers>
+            <aks_training>
+                <class>AKS_Training_Helper</class>
+            </aks_training>
+        </helpers>
+
+        <models>
+            <aks_training>
+                <class>AKS_Training_Model</class>
+                <resourceModel>aks_training_resource</resourceModel>
+            </aks_training>
+            <aks_training_resource>
+                <class>AKS_Training_Model_Resource</class>
+                <entities>
+                    <!-- <aks_training> -> ... -> <aks_training>-->
+                    <!-- $table_model = $installer->getTable('aks_training/aks_training'); -->
+                    <aks_training>
+                        <table>aks_training</table>
+                    </aks_training>
+                </entities>
+            </aks_training_resource>
+        </models>
+
+        <resources>
+            <aks_training_setup>
+                <setup>
+                    <module>AKS_Training</module>
+                    <!-- app/code/core/Mage/Core/Model/Resource/Setup.php -->
+                    <class>Mage_Core_Model_Resource_Setup</class>
+                </setup>
+            </aks_training_setup>
+        </resources>
+    </global>
+
+    <frontend>
+        <routers>
+            <aks_training>
+                <use>standard</use>
+                <args>
+                    <module>AKS_Training</module>
+                    <frontName>training</frontName>
+                </args>
+            </aks_training>
+        </routers>
+
+        <events>
+            <catalog_product_load_after>
+                <observers>
+                    <aks_training>
+                        <!-- model | singleton | disabled -->
+                        <type>model</type>
+                        <class>aks_training/observer</class>
+                        <method>CatalogProductLoadAfter</method>
+                    </aks_training>
+                </observers>
+            </catalog_product_load_after>
+        </events>
+
+        <layout>
+            <updates>
+                <aks_training>
+                    <!-- app/design/frontend/base/default/layout/aks_training.xml -->
+                    <file>aks/training.xml</file>
+                </aks_training>
+            </updates>
+        </layout>
+
+        <translate>
+            <modules>
+                <checkout>
+                    <files>
+                        <default>Mage_Checkout.csv</default>
+                    </files>
+                </checkout>
+            </modules>
+        </translate>
+    </frontend>
+
+
+
+    <!-- ____________________ ADMIN START _______________________________ -->
+    <!--<admin>-->
+        <!--<routers>-->
+            <!--<adminhtml>-->
+                <!--<args>-->
+                    <!--<modules>-->
+                        <!--<aks_training after="Mage_Adminhtml">AKS_Training_Adminhtml</aks_training>-->
+                    <!--</modules>-->
+                <!--</args>-->
+            <!--</adminhtml>-->
+        <!--</routers>-->
+    <!--</admin>-->
+    <admin>
+        <routers>
+            <aks_training>
+                <use>admin</use>
+                <args>
+                    <module>AKS_Training</module>
+                    <frontName>training</frontName>
+                </args>
+            </aks_training>
+        </routers>
+    </admin>
+
+    <adminhtml>
+        <layout>
+            <updates>
+                <aks_training>
+                    <file>aks/training.xml</file>
+                </aks_training>
+            </updates>
+        </layout>
+
+        <events>
+            <controller_action_predispatch>
+                <observers>
+                    <aks_training>
+                        <!-- model | singleton | disabled -->
+                        <type>model</type>
+                        <class>aks_training/observer</class>
+                        <method>ControllerActionPredispatch</method>
+                    </aks_training>
+                </observers>
+            </controller_action_predispatch>
+        </events>
+    </adminhtml>
+
+    <!-- ____________________ ADMIN END _______________________________ -->
+
+
+
+
+
+    <!-- ТОЛЬКО!!! всё что в <default>, будет доступно через - $config_data = Mage::getStoreConfig("aks_training"); -->
+    <default>
+        <aks_training>
+            <recommendation>TEST</recommendation>
+            <some_param>Alex Kraus Test Params with config.xml</some_param>
+        </aks_training>
+
+        <op_rwd>
+            <images>
+                <path>frontend/op_rwd/default/images/</path>
+            </images>
+        </op_rwd>
+    </default>
+
+    <crontab>
+        <jobs>
+            <aks_training_run_import_test>
+                <schedule>
+                    <cron_expr>20 10 * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>aks_training/observer::runImportTest</model>
+                </run>
+            </aks_training_run_import_test>
+        </jobs>
+    </crontab>
+</config>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <AKS_Training>
+            <active>true</active>
+            <codePool>local</codePool>
+
+            <depends>
+                <Mage_Checkout/>
+            </depends>
+        </AKS_Training>
+    </modules>
+</config>

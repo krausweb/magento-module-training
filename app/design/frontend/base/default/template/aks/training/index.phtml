@@ -1,0 +1,34 @@
+<?php
+/**
+ * AKS Training module template
+ *
+ * @category    AKS
+ * @package     AKS_Training
+ * @author      Alexandr Krivonos <krausweb291985@gmail.com>
+ * @copyright   3/22/2016 AKS
+ *
+ * @var         $this Mage_Core_Block_Template
+ */
+?>
+
+<br/><br/>
+<div class="block block-list block-compare">
+    <p><?=$this->getChildHtml("test_helper")?></p>
+
+    <div class="block-title">
+        <strong>
+            <?=$this->__('Customer Info')?><br/>
+            Template Text
+        </strong>
+        <p><?=$this->getChildHtml("name")?></p>
+    </div>
+
+    <div><?=$this->getChildHtml("aks_name")?></div>
+
+    <div class="block-content">
+        <p class="empty">
+            <?=$this->__('Customer Name')?> <br/>
+            Detail text
+        </p>
+    </div>
+</div>

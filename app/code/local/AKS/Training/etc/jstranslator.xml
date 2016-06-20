@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jstranslator>
+    <aks_training_id translate="message" module="aks_training">
+        <message>Test_aks</message>
+    </aks_training_id>
+    <!-- opcheckout.js -->
+    <validate-payment-methods-required translate="message" module="jstranslate">
+        <message>Shipping Price</message>
+    </validate-payment-methods-required>
+    <!-- end opcheckout.js -->
+    <validate-no-html-tags translate="message" module="buyshopconfig">
+        <message>Delivery Date</message>
+    </validate-no-html-tags>
+    <validate-payment-methods-required translate="message" module="checkout">
+        <message>Please specify payment method.</message>
+    </validate-payment-methods-required>
+
+</jstranslator>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- app/design/frontend/base/default/layout/aks_training.xml -->
+<layout>
+    <!-- default - отобразить по всему сайту -->
+    <!--<default> -->
+    <!-- aks_training_index_index - отобразить только когда зашли на "страницу" модуля <routers>-<frontName>training</frontName>
+    Узнать текущие Handles можно через $this->getLayout()->getUpdate()->getHandles(); (вызвав в контроллере/методе) -->
+
+    <default>
+        <reference name="left">
+            <block type="core/text" name="training.default" before="-" >
+                <action method="setText">
+                    <text>Standard Default block. User is Logged! </text>
+                </action>
+            </block>
+        </reference>
+    </default>
+
+    <aks_training_index_index>
+
+            <!-- объявления блоков(name="left") через <block> - в app/design/frontend/base/default/layout/page.xml -->
+            <reference name="left">
+
+                <!-- работа через Template файл -->
+                <block type="core/template" template="aks/training/index.phtml" name="training_template.customer_info" after="leftmenu" >
+                    <!-- работа через простой вывод Текста . Before "-" - сдвинуть в самый верх всех элементов в текущем reference block-->
+                    <block type="core/text" name="training.customer_info.name" as="name" after="leftmenu" >
+                        <action method="setText">
+                            <text>Child NAME</text>
+                        </action>
+                    </block>
+
+                    <!-- пример удаления другого блока -->
+                    <remove name="training.customer_info.name" />
+                    <!-- и записи в него!!! (as должен совпадать!!!) нового блока -->
+                    <block type="core/text" name="training.customer_info.lastname" as="name" after="leftmenu" >
+                        <action method="setText">
+                            <text>Child LASTNAME</text>
+                        </action>
+                    </block>
+
+                    <!-- в блок попадает инфа из helper (helper="aks_training/data/getAlexData")
+                    app/code/local/AKS/Training/Helper/Data.php:getAlexData -->
+                    <block type="core/text" name="training.customer_info.test_helper" as="test_helper">
+                        <action method="setText" >
+                            <text helper="aks_training/data/getAlexData" />
+                        </action>
+                    </block>
+                </block>
+
+                <!-- подключение template-блока + вызов метода с класса текущего/нашего модуля(aks_training) -->
+                <block type="aks_training/customer_info" template="aks/training/aksleft.phtml" name="training.customer_info.aks_name" as="aks_name"/>
+
+
+                <!-- работа через простой вывод Текста . Before "-" - сдвинуть в самый верх всех элементов в текущем reference block-->
+                <block type="core/text" name="training.customer_info" before="-">
+                    <action method="setText">
+                        <text>--- Alex Kraus Frontend Layout ---</text>
+                    </action>
+                </block>
+
+                <!-- блок отображается елси в конфиге ОН ВКЛЮчен. Атрибут для работы - ifconfig
+                 и главные(!) записи в таблице:
+                 core_config_data.path = "aks_training/block_visible"
+                 и core_config_data.value = 1 или 0 (включить/выключить) -->
+                <block type="core/text" name="training.customer_info.test_ifconfig" >
+                    <action method="setText" ifconfig="aks_training/block_visible">
+                        <text> -!- ifconfig example -!- </text>
+                    </action>
+                </block>
+
+            </reference>
+
+        <!-- все мотоды для Head, типа addJS в - app/code/core/Mage/Page/Block/Html/Head.php
+            подключит в шапку скрипт /skin/some_path.js -->
+        <!--<reference name="head">
+            <action method="addJs"><script>some_path.js</script></action>
+        </reference>-->
+
+        <!-- продублировать другой handle (default) -->
+        <!--<customer_logged_in>
+            <update handle="default" />
+        </customer_logged_in>-->
+
+    </aks_training_index_index>
+
+
+    <!-- когда пользователь НЕ авторизован (_out/_in) удалять/remove все наши блоки -->
+    <customer_logged_out>
+        <remove name="training_template.customer_info" />
+        <remove name="training.customer_info.name" />
+        <remove name="training.customer_info.lastname" />
+        <remove name="training.customer_info.aks_name" />
+        <remove name="training.customer_info.test_ifconfig" />
+        <remove name="training.customer_info.test_helper" />
+        <remove name="training.customer_info" />
+    </customer_logged_out>
+
+</layout>
